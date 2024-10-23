@@ -11,11 +11,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
 class ValidateLoginImplTest {
+
     @InjectMocks
     private ValidateLoginImpl validateLogin;
 
     @Test
-    void validate_Login_When_Ok() {
+    void validateLoginWhenOk() {
         Login login = new Login();
         login.setUsername("user");
         login.setPassword("password");
@@ -24,13 +25,13 @@ class ValidateLoginImplTest {
     }
 
     @Test
-    void throw_Exception_When_Login_Is_Null() {
+    void throwExceptionWhenLoginIsNull() {
         Exception exception = assertThrows(RuntimeException.class, () -> validateLogin.validateLogin(null));
         assertEquals("Login is invalid", exception.getMessage());
     }
 
     @Test
-    void throw_Exception_When_Username_Is_Null() {
+    void throwExceptionWhenUsernameIsNull() {
         Login login = new Login();
 
         Exception exception = assertThrows(RuntimeException.class, () -> validateLogin.validateLogin(login));
@@ -38,7 +39,7 @@ class ValidateLoginImplTest {
     }
 
     @Test
-    void throw_Exception_When_Username_Is_Blank() {
+    void throwExceptionWhenUsernameIsBlank() {
         Login login = new Login();
         login.setUsername("");
 
@@ -47,7 +48,7 @@ class ValidateLoginImplTest {
     }
 
     @Test
-    void throw_Exception_When_Password_Is_Null() {
+    void throwExceptionWhenPasswordIsNull() {
         Login login = new Login();
         login.setUsername("username");
 
@@ -56,7 +57,7 @@ class ValidateLoginImplTest {
     }
 
     @Test
-    void throw_Exception_When_Password_Is_Blank() {
+    void throwExceptionWhenPasswordIsBlank() {
         Login login = new Login();
         login.setUsername("user");
         login.setPassword("");

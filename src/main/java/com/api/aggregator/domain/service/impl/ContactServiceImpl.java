@@ -23,26 +23,21 @@ public class ContactServiceImpl implements IContactService {
     private IContactGateway contactGateway;
 
     /**
-     * This method set first page to start recovery the contacts
+     * This method is responsible to recovery all the contacts.
+     * Called the first page and after continues getting the pages as long as they exist
      * @return List of contacts
      */
     @Override
     public List<Contact> getAllContacts() {
         int page = 1;
-        return getAllContactsByPage(page);
-    }
 
-    /**
-     * Recursive method for calling the contact gateway.
-     * This method is recalled until all pages have been passed.
-     * @return List of contacts
-     */
-    private List<Contact> getAllContactsByPage(int page) {
         Page<Contact> contactPage = contactGateway.getAllContacts(page);
         List<Contact> contacts = new ArrayList<>(contactPage.getContent());
 
-        if (contactPage.hasNext())
-            contacts.addAll(getAllContactsByPage(page + 1));
+        while (contactPage.hasNext()) {
+            contactPage = contactGateway.getAllContacts(page+1);
+            contacts.addAll(contactPage.getContent());
+        }
 
         return contacts;
     }

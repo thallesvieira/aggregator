@@ -27,7 +27,7 @@ class AuthenticationControllerTest {
     private IValidateLogin validateLogin;
 
     @Test
-    void login_ShouldReturnToken_WhenCredentialsAreValid() {
+    void loginShouldReturnTokenWhenCredentialsAreValid() {
         Login login = new Login();
         login.setUsername("user");
         login.setPassword("password");
@@ -48,7 +48,7 @@ class AuthenticationControllerTest {
     }
 
     @Test
-    void login_ShouldThrowException_WhenAuthenticationFails() {
+    void loginShouldThrowExceptionWhenAuthenticationFails() {
         Login login = new Login();
         login.setUsername("user");
         login.setPassword("password");
