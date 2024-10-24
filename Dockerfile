@@ -6,9 +6,10 @@ COPY . .
 
 RUN chmod +x ./gradlew
 
-RUN ./gradlew build --no-daemon
+RUN ./gradlew clean build --no-daemon
+RUN ls -l build/libs
 
-COPY ./build/libs/*.jar /app/aggregator.jar
+COPY build/libs/*.jar /app/aggregator.jar
 
 EXPOSE 7000
 
