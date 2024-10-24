@@ -26,6 +26,7 @@ public class ContactController {
     @GetMapping("/contacts")
     public ResponseEntity<List<Contact>> getAllContacts() {
         try {
+
             logger.info("Trying to get all contacts");
             return ResponseEntity.ok(contactService.getAllContacts());
         } catch (Exception ex) {
