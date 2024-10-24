@@ -1,6 +1,7 @@
 FROM gradle:7.5.1-jdk17 as builder
 WORKDIR /app
 COPY . .
+RUN chmod +x ./gradlew
 RUN ./gradlew build --no-daemon
 
 FROM openjdk:17-jdk-slim
