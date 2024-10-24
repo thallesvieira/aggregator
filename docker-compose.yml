@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  backend:
+    image: thallesjacobs/aggregator:latest
+    ports:
+      - "8080:8080"
+    environment:
+      API_CONTACT_URL: https://k-messages-api.herokuapp.com/api/v1
+      API_CONTACT_TOKEN: Bearer J7ybt6jv6pdJ4gyQP9gNonsY
+      DATABASE_URL: jdbc:h2:mem:testdb
+      DATABASE_USERNAME: sa
+      DATABASE_PASSWORD: password
+    networks:
+      - app-network
+
+  h2:
+    image: openjdk:17-jdk-slim
+    command: [ "java", "-cp", "/h2/bin/h2*.jar", "org.h2.tools.Server", "-tcp", "-tcpAllowOthers" ]
+    ports:
+      - "8082:8082"  # Porta do console H2
+    volumes:
+      - h2-data:/h2
+    networks:
+      - app-network
+
+volumes:
+  h2-data:
+
+networks:
+  app-network:
+    driver: bridge
