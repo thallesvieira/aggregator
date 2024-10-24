@@ -60,11 +60,23 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
+ext {
+	excludePackages = [
+		"**/AggregatorApplication.java",
+		"**/SwaggerConfig.java",
+		"**/com/api/aggregator/domain/exception/**",
+		"**/com/api/aggregator/domain/gateway/**",
+		"**/com/api/aggregator/domain/repository/**",
+		"**/com/api/aggregator/domain/security/**",
+		"**/com/api/aggregator/domain/service/impl/UserDetailService*"
+	]
+}
+
 sonarqube {
 	properties {
 		property("sonar.projectKey", "thallesvieira_aggregator")
 		property("sonar.organization", "thallesvieira")
 		property("sonar.host.url", "https://sonarcloud.io")
-		property("sonar.coverage.exclusions", "**/AggregatorApplication.kt")
+		property("sonar.coverage.exclusions", excludePackages)
 	}
 }
