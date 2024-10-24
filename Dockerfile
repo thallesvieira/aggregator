@@ -10,6 +10,6 @@ RUN ./gradlew build --no-daemon
 
 COPY build/libs/*.jar /app/aggregator.jar
 
-EXPOSE 7000
+EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "aggregator.jar"]
+ENTRYPOINT ["java", "-jar", "/app/aggregator.jar"]
