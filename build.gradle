@@ -65,7 +65,6 @@ sonarqube {
 		property("sonar.projectKey", "thallesvieira_aggregator")
 		property("sonar.organization", "thallesvieira")
 		property("sonar.host.url", "https://sonarcloud.io")
-		property("sonar.gradle.skipCompile",true)
 		property("sonar.coverage.exclusions", "**/AggregatorApplication.kt")
 	}
 }
