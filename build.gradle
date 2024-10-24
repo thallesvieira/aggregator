@@ -2,6 +2,19 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.1.5'
 	id 'io.spring.dependency-management' version '1.1.5'
+	id("org.sonarqube") version "4.4.1.3373"
+	id 'jacoco'
+}
+
+jacoco {
+	toolVersion = "0.8.8"
+}
+
+tasks.jacocoTestReport {
+	reports {
+		xml.required.set(true)
+		html.required.set(true)
+	}
 }
 
 group = 'com.api'
@@ -45,4 +58,13 @@ dependencyManagement {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+sonarqube {
+	properties {
+		property("sonar.projectKey", "thallesvieira_aggregator")
+		property("sonar.organization", "thallesvieira")
+		property("sonar.host.url", "https://sonarcloud.io")
+		property("sonar.coverage.exclusions", "**/AggregatorApplication.kt")
+	}
 }
