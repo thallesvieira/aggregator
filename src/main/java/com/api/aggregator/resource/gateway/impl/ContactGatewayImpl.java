@@ -46,8 +46,14 @@ public class ContactGatewayImpl implements IContactGateway {
             logger.info("Trying get contacts in the page {}", page);
             ResponseEntity<Contacts> response = contactGatewayFeign.getAllContacts(token, page);
 
-            int totalElementsPerPage = Integer.parseInt(response.getHeaders().get("page-items").iterator().next());
-            int totalElements = Integer.parseInt(response.getHeaders().get("total-count").iterator().next());
+            int totalElementsPerPage = 0;
+            int totalElements = 0;
+
+            if (response.getHeaders().containsKey("page-items"))
+                totalElementsPerPage = Integer.parseInt(response.getHeaders().get("page-items").iterator().next());
+
+            if (response.getHeaders().containsKey("total-count"))
+                totalElements = Integer.parseInt(response.getHeaders().get("total-count").iterator().next());
 
             logger.info("Convert result to page");
             Pageable pageable = PageRequest.of(page-1, totalElementsPerPage);

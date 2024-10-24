@@ -4,9 +4,6 @@ import com.api.aggregator.domain.exception.ExceptionResponse;
 import com.api.aggregator.domain.model.contact.Contact;
 import com.api.aggregator.domain.model.contact.Contacts;
 import com.api.aggregator.resource.gateway.IContactGatewayFeign;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import feign.Request;
-import feign.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,9 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 
-import java.io.ByteArrayInputStream;
 import java.lang.reflect.Field;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,15 +1,11 @@
-FROM openjdk:17-jdk-alpine
-
+FROM gradle:7.5.1-jdk17 as builder
 WORKDIR /app
-
 COPY . .
-
 RUN chmod +x ./gradlew
-
 RUN ./gradlew build --no-daemon
 
-COPY build/libs/*.jar /app/aggregator.jar
-
-EXPOSE 7000
-
-ENTRYPOINT ["java", "-jar", "aggregator.jar"]
+FROM openjdk:17-jdk-slim
+WORKDIR /app
+COPY --from=builder /app/build/libs/aggregator-0.0.1-SNAPSHOT.jar /app/aggregator.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "/app/aggregator.jar"]

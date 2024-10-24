@@ -78,7 +78,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build the Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/aggregator:latest .
+        run: docker build --no-cache -t ${{ secrets.DOCKER_USERNAME }}/aggregator:latest .
 
       - name: Push the Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/aggregator:latest

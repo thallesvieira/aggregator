@@ -42,7 +42,7 @@ class AuthenticationControllerTest {
         assertEquals(200, response.getStatusCodeValue());
         Token token = (Token) response.getBody();
         assertNotNull(token);
-        assertEquals(mockToken, token.getToken());
+        assertEquals(mockToken, token.getTokenAuth());
         assertEquals("Bearer", token.getType());
         verify(auth).authenticateLogin(login);
     }
