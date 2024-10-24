@@ -1,7 +1,8 @@
 package com.api.aggregator.resource.gateway;
 
-import feign.Response;
+import com.api.aggregator.domain.model.contact.Contacts;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface IContactGatewayFeign {
 
     @GetMapping("/contacts")
-    Response getAllContacts(
+    ResponseEntity<Contacts> getAllContacts(
             @RequestHeader("Authorization") String authorization,
             @RequestParam("page") int page
     );

@@ -4,10 +4,12 @@ import com.api.aggregator.domain.exception.ExceptionResponse;
 import com.api.aggregator.domain.model.Login;
 import com.api.aggregator.domain.validate.IValidateLogin;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 
 /**
  * Class to validate login
  */
+@Component
 public class ValidateLoginImpl implements IValidateLogin {
 
     @Override
