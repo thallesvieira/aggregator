@@ -31,7 +31,7 @@ class UserRepositoryImplTest {
 
 
     @Test
-    void findByUsername_Success() {
+    void findByUsernameSuccess() {
         String username = "username";
 
         UserEntity userEntity = new UserEntity();
@@ -50,7 +50,7 @@ class UserRepositoryImplTest {
     }
 
     @Test
-    void findByUsername_NotFound() {
+    void findByUsernameNotFound() {
         String username = "nonexistentuser";
 
         when(userRepository.findByUsername(username)).thenReturn(Optional.empty());
@@ -61,7 +61,7 @@ class UserRepositoryImplTest {
     }
 
     @Test
-    void findById_Success() {
+    void findByIdSuccess() {
         Long userId = 1L;
         UserEntity userEntity = new UserEntity();
         userEntity.setId(userId);
@@ -79,7 +79,7 @@ class UserRepositoryImplTest {
     }
 
     @Test
-    void findById_NotFound() {
+    void findByIdNotFound() {
         Long userId = 999L;
 
         when(userRepository.findById(userId)).thenReturn(Optional.empty());
@@ -88,5 +88,4 @@ class UserRepositoryImplTest {
         assertEquals("User not found!", exception.getMessage());
         assertEquals(HttpStatus.NOT_FOUND, exception.getStatus());
     }
-
 }

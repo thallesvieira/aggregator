@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -19,7 +18,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -32,7 +32,7 @@ class ContactServiceImplTest {
     private IContactGateway contactGateway;
 
     @Test
-    void getAllContacts_When_has_2_Pages() {
+    void getAllContactsWhenHas2Pages() {
         List<Contact> mockContacts = new ArrayList<>();
 
         Contact contact = new Contact();
@@ -74,7 +74,7 @@ class ContactServiceImplTest {
     }
 
     @Test
-    void getAllContacts_When_has_1_Pages() {
+    void getAllContactsWhenHas1Pages() {
         List<Contact> mockContacts = new ArrayList<>();
 
         Contact contact = new Contact();
@@ -98,7 +98,7 @@ class ContactServiceImplTest {
     }
 
     @Test
-    void getAllContacts_When_has_0_Pages() {
+    void getAllContactsWhenHas0Pages() {
         Page<Contact> emptyPage = new PageImpl<>(Collections.emptyList(), PageRequest.of(0, 10), 0);
 
         when(contactGateway.getAllContacts(1)).thenReturn(emptyPage);

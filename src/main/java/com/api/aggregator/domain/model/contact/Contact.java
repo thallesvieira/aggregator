@@ -12,7 +12,7 @@ public class Contact {
     private Long id;
     private String name;
     private String email;
-    private String source = ContactSource.KENECT_LABS.name();
+    private String source = ContactGlobalSource.getInstance().getContactSource().name();
     @JsonProperty("created_at")
     private LocalDateTime createdAt;
     @JsonProperty("updated_at")

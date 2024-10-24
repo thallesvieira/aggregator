@@ -2,7 +2,6 @@ package com.api.aggregator.application.web.controller;
 
 import com.api.aggregator.domain.model.contact.Contact;
 import com.api.aggregator.domain.model.contact.ContactSource;
-import com.api.aggregator.domain.model.contact.Contacts;
 import com.api.aggregator.domain.service.impl.ContactServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -51,7 +50,7 @@ class ContactControllerTest {
     }
 
     @Test
-    void throwException_When_Try_GetAllContacts() {
+    void throwExceptionWhenTryGetAllContacts() {
         when(contactService.getAllContacts()).thenThrow(new RuntimeException("failed"));
 
         Exception exception = assertThrows(Exception.class, () -> {
