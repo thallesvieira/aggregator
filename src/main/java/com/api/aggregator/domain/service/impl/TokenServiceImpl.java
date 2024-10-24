@@ -29,8 +29,8 @@ public class TokenServiceImpl implements ITokenService {
     @Value("${token.jwt.secret}")
     private String secret;
 
-    private final static String AUTHORIZATION = "Authorization";
-    private final static String BEARER = "Bearer ";
+    private static final String AUTHORIZATION = "Authorization";
+    private static final String BEARER = "Bearer ";
 
     /** Method to create a token using expiration and secrete configured in application.properties.
      * Save user id in subject to identify user when necessary.
@@ -91,7 +91,7 @@ public class TokenServiceImpl implements ITokenService {
      * @return
      */
     @Override
-    public Boolean isValid(String token) {
+    public boolean isValid(String token) {
         try {
             logger.info("Check if token is valid");
             Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token);

@@ -100,9 +100,7 @@ public class AuthenticationFilterImpl extends OncePerRequestFilter implements IA
 
 		try {
 			Authentication authentication = authenticateUser(authenticationLogin);
-			String token = tokenService.createJwt(authentication);
-
-			return token;
+			return tokenService.createJwt(authentication);
 		}catch (Exception e) {
 			throw new ExceptionResponse("Invalid user.", HttpStatus.FORBIDDEN);
 		}

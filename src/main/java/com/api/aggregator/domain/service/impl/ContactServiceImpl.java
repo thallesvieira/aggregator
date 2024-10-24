@@ -35,6 +35,7 @@ public class ContactServiceImpl implements IContactService {
         List<Contact> contacts = new ArrayList<>(contactPage.getContent());
 
         while (contactPage.hasNext()) {
+            logger.info("Getting new contacts from page {}", page+1);
             contactPage = contactGateway.getAllContacts(page+1);
             contacts.addAll(contactPage.getContent());
         }
