@@ -14,7 +14,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 
 import java.io.ByteArrayInputStream;
@@ -36,11 +38,6 @@ class ContactGatewayImplTest {
 
     @Mock
     private IContactGatewayFeign contactGatewayFeign;
-
-    @Mock
-    private ObjectMapper objectMapper;
-
-    private ObjectMapper objectMapperLocal = new ObjectMapper();
 
     @BeforeEach
     void setUp() throws NoSuchFieldException, IllegalAccessException {
@@ -69,31 +66,13 @@ class ContactGatewayImplTest {
         Contacts contacts = new Contacts();
         contacts.setContacts(mockContacts);
 
-        Request request = Request.create(
-                Request.HttpMethod.GET,
-                "http://api.com/contacts",
-                Collections.emptyMap(),
-                null,
-                StandardCharsets.UTF_8
-        );
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("page-items", "1");
+        headers.add("total-count", "2");
 
-        Map<String, Collection<String>> headers = new HashMap<>();
-        headers.put("Page-Items", Collections.singletonList("2"));
-        headers.put("Total-Count", Collections.singletonList("2"));
+        ResponseEntity<Contacts> responseEntity = new ResponseEntity<>(contacts, headers, HttpStatus.OK);
 
-        String contactsJson = "{\"contacts\": []}";
-        ByteArrayInputStream responseBody = new ByteArrayInputStream(contactsJson.getBytes(StandardCharsets.UTF_8));
-
-        Response response = Response.builder()
-                .status(200)
-                .headers(headers)
-                .body(responseBody, 100)
-                .request(request)
-                .build();
-
-        when(contactGatewayFeign.getAllContacts("token", 1)).thenReturn(response);
-
-        when(objectMapper.readValue(response.body().asInputStream(), Contacts.class)).thenReturn(contacts);
+        when(contactGatewayFeign.getAllContacts("token", 1)).thenReturn(responseEntity);
 
         Page<Contact> contactPage = contactGatewayImpl.getAllContacts(1);
 
@@ -111,31 +90,13 @@ class ContactGatewayImplTest {
         Contacts contacts = new Contacts();
         contacts.setContacts(mockContacts);
 
-        Request request = Request.create(
-                Request.HttpMethod.GET,
-                "http://api.com/contacts",
-                Collections.emptyMap(),
-                null,
-                StandardCharsets.UTF_8
-        );
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("page-items", "1");
+        headers.add("total-count", "0");
 
-        Map<String, Collection<String>> headers = new HashMap<>();
-        headers.put("Page-Items", Collections.singletonList("1"));
-        headers.put("Total-Count", Collections.singletonList("0"));
+        ResponseEntity<Contacts> responseEntity = new ResponseEntity<>(contacts, headers, HttpStatus.OK);
 
-        String contactsJson = "{\"contacts\": []}";
-        ByteArrayInputStream responseBody = new ByteArrayInputStream(contactsJson.getBytes(StandardCharsets.UTF_8));
-
-        Response response = Response.builder()
-                .status(200)
-                .headers(headers)
-                .body(responseBody, 100)
-                .request(request)
-                .build();
-
-        when(contactGatewayFeign.getAllContacts("token", 1)).thenReturn(response);
-
-        when(objectMapper.readValue(response.body().asInputStream(), Contacts.class)).thenReturn(contacts);
+        when(contactGatewayFeign.getAllContacts("token", 1)).thenReturn(responseEntity);
 
         Page<Contact> contactPage = contactGatewayImpl.getAllContacts(1);
 
