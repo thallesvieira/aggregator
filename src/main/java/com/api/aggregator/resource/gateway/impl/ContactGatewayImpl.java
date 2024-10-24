@@ -52,7 +52,7 @@ public class ContactGatewayImpl implements IContactGateway {
             if (response.getHeaders().containsKey("page-items"))
                 totalElementsPerPage = Integer.parseInt(response.getHeaders().get("page-items").iterator().next());
 
-            if (response.getHeaders().containsKey("page-items"))
+            if (response.getHeaders().containsKey("total-count"))
                 totalElements = Integer.parseInt(response.getHeaders().get("total-count").iterator().next());
 
             logger.info("Convert result to page");
